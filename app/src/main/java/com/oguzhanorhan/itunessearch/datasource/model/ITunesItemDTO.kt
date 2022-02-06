@@ -1,5 +1,6 @@
 package com.oguzhanorhan.itunessearch.datasource.model
 
+import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
 import java.util.*
 
 class ITunesItemDTO {
@@ -46,3 +47,5 @@ class ITunesItemDTO {
     var hasITunesExtras = false
     var collectionArtistName: String? = null
 }
+
+fun ITunesItemDTO.mapToDomain(): ITunesItem = ITunesItem()
