@@ -39,7 +39,7 @@ val networkModule: Module = module {
 }
 
 
-private const val BASE_URL = ""
+private const val BASE_URL = "https://itunes.apple.com/"
 
 private val retrofit: Retrofit = createNetworkClient(BASE_URL)
 

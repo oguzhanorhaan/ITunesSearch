@@ -5,9 +5,15 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.oguzhanorhan.itunessearch.datasource.model.ITunesItemDTO
+import kotlinx.coroutines.Deferred
+import retrofit2.http.GET
+import retrofit2.http.Url
 
 interface ItunesApi {
-
+    @GET("search")
+    fun search(@Url url : String):
+            Deferred<List<ITunesItemDTO>>
 }
 
 private val moshi = Moshi.Builder()
