@@ -9,16 +9,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.oguzhanorhan.itunessearch.data.model.ITunesApiStatus
 import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
+import com.oguzhanorhan.itunessearch.presentation.search.ItemListAdapter
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<ITunesItem>?) {
-    val adapter = recyclerView.adapter as BeerListAdapter
+    val adapter = recyclerView.adapter as ItemListAdapter
     adapter.submitList(data)
 }
 
-/**
- * Uses the Glide library to load an image by URL into an [ImageView]
- */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
@@ -33,13 +31,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
-/**
- * This binding adapter displays the [BeersApiStatus] of the network request in an image view.  When
- * the request is loading, it displays a loading_animation.  If the request has an error, it
- * displays a broken image to reflect the connection error.  When the request is finished, it
- * hides the image view.
- */
-@BindingAdapter("beersApiStatus")
+@BindingAdapter("apiStatus")
 fun bindStatus(statusImageView: ImageView, status: ITunesApiStatus?) {
     when (status) {
         ITunesApiStatus.LOADING -> {
