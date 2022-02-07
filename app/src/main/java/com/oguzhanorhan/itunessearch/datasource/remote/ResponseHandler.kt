@@ -9,7 +9,7 @@ enum class ErrorCodes(val code: Int) {
 }
 
 open class ResponseHandler {
-    fun <T : Any> handleSuccess(data: T): Resource<T> {
+    fun <T : Any> handleSuccess(data: T?): Resource<T> {
         return Resource.success(data)
     }
 

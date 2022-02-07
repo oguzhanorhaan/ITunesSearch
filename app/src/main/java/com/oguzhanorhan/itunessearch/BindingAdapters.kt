@@ -8,12 +8,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.oguzhanorhan.itunessearch.data.model.ITunesApiStatus
+import com.oguzhanorhan.itunessearch.domain.model.FilterItem
 import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
+import com.oguzhanorhan.itunessearch.presentation.search.FilterListAdapter
 import com.oguzhanorhan.itunessearch.presentation.search.ItemListAdapter
 
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<ITunesItem>?) {
+@BindingAdapter("itunesListData")
+fun bindItunesItemsRecyclerView(recyclerView: RecyclerView, data: List<ITunesItem>?) {
     val adapter = recyclerView.adapter as ItemListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("filterListData")
+fun bindFilterRecyclerView(recyclerView: RecyclerView, data: List<FilterItem>?) {
+    val adapter = recyclerView.adapter as FilterListAdapter
     adapter.submitList(data)
 }
 
