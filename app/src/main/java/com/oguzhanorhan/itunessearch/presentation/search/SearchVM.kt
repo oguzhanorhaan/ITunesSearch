@@ -78,4 +78,12 @@ class SearchVM constructor(
             }
         }
     }
+
+    fun displayItemDetails(item: ITunesItem) {
+        _navigateToSelectedItem.value = item
+    }
+
+    fun displayItemDetailsComplete() {
+        _navigateToSelectedItem.value = null
+    }
 }

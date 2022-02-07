@@ -6,9 +6,11 @@ import com.oguzhanorhan.itunessearch.datasource.remote.ItunesApi
 import com.oguzhanorhan.itunessearch.datasource.remote.RemoteDataSourceImpl
 import com.oguzhanorhan.itunessearch.datasource.remote.ResponseHandler
 import com.oguzhanorhan.itunessearch.datasource.remote.createNetworkClient
+import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
 import com.oguzhanorhan.itunessearch.domain.repository.ITunesRepository
 import com.oguzhanorhan.itunessearch.domain.usecase.RetrieveFilterItemsUseCase
 import com.oguzhanorhan.itunessearch.domain.usecase.SearchItemsUseCase
+import com.oguzhanorhan.itunessearch.presentation.itemdetails.ItemDetailsVM
 import com.oguzhanorhan.itunessearch.presentation.search.SearchVM
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
@@ -34,6 +36,7 @@ val viewModelModule: Module = module {
             searchItemsUseCase = get(),
             retrieveFilterItemsUseCase = get())
     }
+    viewModel { (item : ITunesItem) -> ItemDetailsVM(item) }
 }
 
 val useCaseModule: Module = module {

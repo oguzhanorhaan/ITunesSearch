@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import com.oguzhanorhan.itunessearch.databinding.FragmentSearchBinding
 import com.oguzhanorhan.itunessearch.domain.model.FilterItem
@@ -38,7 +40,7 @@ class SearchFragment : Fragment()  {
         })
 
         binding.itemList.adapter = ItemListAdapter(ItemListAdapter.OnClickListener {
-            // viewModel.displayItemDetails(it)
+            viewModel.displayItemDetails(it)
         })
 
         binding.itemList.addItemDecoration(LayoutMarginDecoration( 1, 15 ))
@@ -51,6 +53,13 @@ class SearchFragment : Fragment()  {
             }
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
+            }
+        })
+
+        viewModel.navigateToSelectedItem.observe(this.viewLifecycleOwner, Observer {item ->
+            item?.let {
+                Navigation.findNavController(binding.root).navigate(SearchFragmentDirections.actionSearchFragmentToItemDetailsFragment(it))
+                viewModel.displayItemDetailsComplete()
             }
         })
 

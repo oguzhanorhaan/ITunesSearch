@@ -7,5 +7,18 @@
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.oguzhanorhan.itunessearch.presentation.search.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_itemDetailsFragment"
+            app:destination="@id/itemDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemDetailsFragment"
+        android:name="com.oguzhanorhan.itunessearch.presentation.itemdetails.ItemDetailsFragment"
+        android:label="ItemDetailsFragment">
+        <argument
+            android:name="selectedItem"
+            app:argType="com.oguzhanorhan.itunessearch.domain.model.ITunesItem"
+            />
+    </fragment>
 </navigation>
