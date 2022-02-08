@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.oguzhanorhan.itunessearch.R
 import com.oguzhanorhan.itunessearch.databinding.FragmentSearchBinding
 import com.oguzhanorhan.itunessearch.domain.model.FilterItem
 import com.oguzhanorhan.itunessearch.injectFeature
@@ -88,10 +89,10 @@ class SearchFragment : Fragment()  {
     private fun handleSearchBox(text: String) {
         selectedCategory?.let { category ->
             if (text.length <= 2) {
-                Toast.makeText(activity, "Please enter more than 2 character", Toast.LENGTH_LONG).show()
+                Toast.makeText(activity,context?.getString(R.string.enter_more_than_2_char) ?: "", Toast.LENGTH_LONG).show()
             } else {
                 viewModel.searchItems(text, category)
             }
-        } ?: Toast.makeText(activity, "Please select a category", Toast.LENGTH_LONG).show()
+        } ?: Toast.makeText(activity, context?.getString(R.string.select_category) ?: "", Toast.LENGTH_LONG).show()
     }
 }
