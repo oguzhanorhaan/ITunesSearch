@@ -25,8 +25,7 @@ class ItemListAdapter( val onClickListener: OnClickListener ) :
         }
 
         override fun areContentsTheSame(oldItem: ITunesItem, newItem: ITunesItem): Boolean {
-            // return oldItem.id == newItem.id todo
-            return false
+            return oldItem == newItem
         }
     }
 

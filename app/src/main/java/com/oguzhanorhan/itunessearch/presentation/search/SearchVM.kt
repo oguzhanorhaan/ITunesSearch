@@ -17,6 +17,8 @@ import kotlinx.coroutines.launch
 class SearchVM constructor(
     private val searchItemsUseCase: SearchItemsUseCase,
     private val retrieveFilterItemsUseCase: RetrieveFilterItemsUseCase): ViewModel() {
+    private var currentOffSet = 0
+    private var paginationLimit = 20
 
     private val _status = MutableLiveData<ITunesApiStatus>()
 
@@ -59,24 +61,41 @@ class SearchVM constructor(
         viewModelJob.cancel()
     }
 
+    var domainItems = ArrayList<ITunesItem>()
+
     fun searchItems(text: String, category: FilterItem) {
-        coroutineScope.launch {
-            _status.value = ITunesApiStatus.LOADING
-            val listResult = searchItemsUseCase.get(text, category)
-            _status.value = listResult.status
 
-            when(_status.value) {
-                ITunesApiStatus.DONE -> {
-                    val domainItems = ArrayList<ITunesItem>()
-                    listResult.data?.forEach{
-                        domainItems.add(it.mapToDomain())
-                    }
-                    _items.value = domainItems
+        if (currentOffSet < domainItems.size && currentOffSet > 0) {
+                if (currentOffSet + paginationLimit < domainItems.size) {
+                    currentOffSet+=paginationLimit
+                } else {
+                    currentOffSet = domainItems.size
                 }
+            _items.value = ArrayList(domainItems.subList(0, currentOffSet))
+        }
+        else {
+            coroutineScope.launch {
+                _status.value = ITunesApiStatus.LOADING
+                val listResult = searchItemsUseCase.get(text, category)
+                _status.value = listResult.status
+                domainItems.clear()
 
-                ITunesApiStatus.ERROR ->_items.value = ArrayList()
+                when(_status.value) {
+                    ITunesApiStatus.DONE -> {
+
+                        listResult.data?.forEach{
+                            domainItems.add(it.mapToDomain())
+                        }
+                        _items.value = ArrayList(domainItems.subList(0, paginationLimit))
+                        currentOffSet = paginationLimit
+                    }
+
+                    ITunesApiStatus.ERROR ->_items.value = ArrayList()
+                }
             }
         }
+
+
     }
 
     fun displayItemDetails(item: ITunesItem) {
@@ -85,5 +104,10 @@ class SearchVM constructor(
 
     fun displayItemDetailsComplete() {
         _navigateToSelectedItem.value = null
+    }
+
+    fun resetSearchParameters() {
+        currentOffSet = 0
+        domainItems.clear()
     }
 }
