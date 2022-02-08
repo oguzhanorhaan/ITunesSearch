@@ -6,10 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.oguzhanorhan.itunessearch.databinding.FragmentSearchBinding
 import com.oguzhanorhan.itunessearch.domain.model.FilterItem
 import com.oguzhanorhan.itunessearch.injectFeature
@@ -36,6 +38,7 @@ class SearchFragment : Fragment()  {
 
         binding.filterList.adapter = FilterListAdapter(FilterListAdapter.OnClickListener {
             selectedCategory = it
+            viewModel.resetSearchParameters()
             handleSearchBox(binding.searchBar.query.toString())
         })
 
@@ -53,6 +56,22 @@ class SearchFragment : Fragment()  {
             }
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
+            }
+        })
+
+        binding.itemList.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
+                if (!recyclerView.canScrollVertically(1) && dy > 0)
+                {
+                    selectedCategory?.let { selectedCategory ->
+                        viewModel.searchItems(
+                            binding.searchBar.query.toString(),
+                            selectedCategory
+                        )
+                    }
+                }
             }
         })
 
