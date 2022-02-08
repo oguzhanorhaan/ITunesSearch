@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ITunesSearch</string>
+    <string name="release_date">Release date:</string>
+    <string name="price">Price:</string>
+    <string name="short_description">Short description</string>
+    <string name="artist_name">Artist name:</string>
+    <string name="collection_name">Collection name:</string>
 </resources>

@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            app:title="@{viewModel.selectedItem.collectionName}"/>
+            app:title="@{viewModel.selectedItem.trackName}"/>
 
         <ImageView
             android:id="@+id/detail_image"
@@ -44,11 +44,11 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/release_date"
+                    android:id="@+id/release_date_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="@{viewModel.selectedItem.releaseDate}"
+                    android:text="@string/release_date"
                     android:textColor="#de000000"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -56,12 +56,57 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
-                    android:id="@+id/price"
+                    android:id="@+id/release_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@{viewModel.selectedItem.formattedDate}"
+                    android:textColor="#de000000"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/release_date_desc"/>
+
+                <TextView
+                    android:id="@+id/price_desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/release_date"
+                    android:text="@string/price"
+                    android:textSize="16sp"
+                    android:paddingTop="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price_desc"
                     android:text="@{viewModel.selectedItem.collectionPrice.toString()}"
+                    android:textSize="16sp"
+                    android:paddingTop="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/collection_name_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/price"
+                    android:text="@string/collection_name"
+                    android:textSize="16sp"
+                    android:paddingTop="16dp"
+                    />
+
+                <TextView
+                    android:id="@+id/collection_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/collection_name_desc"
+                    android:text="@{viewModel.selectedItem.collectionName}"
                     android:textSize="16sp"
                     android:paddingTop="16dp"
                     />

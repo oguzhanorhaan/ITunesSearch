@@ -1,4 +1,4 @@
-package com.oguzhanorhan.itunessearch
+package com.oguzhanorhan.itunessearch.common
 
 import java.lang.Exception
 import java.text.SimpleDateFormat

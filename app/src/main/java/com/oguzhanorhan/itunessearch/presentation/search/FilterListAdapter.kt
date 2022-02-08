@@ -1,5 +1,6 @@
 package com.oguzhanorhan.itunessearch.presentation.search
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -34,7 +35,6 @@ class FilterListAdapter ( val onClickListener: OnClickListener ) :
                                     viewType: Int): FilterItemViewHolder {
         return FilterItemViewHolder(ItemFilterBinding.inflate(LayoutInflater.from(parent.context)))
     }
-
 
     override fun onBindViewHolder(holder: FilterItemViewHolder, position: Int) {
         val item = getItem(position)
