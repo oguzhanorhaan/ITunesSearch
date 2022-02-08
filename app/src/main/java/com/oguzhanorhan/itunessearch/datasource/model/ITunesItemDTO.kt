@@ -5,7 +5,7 @@ import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class ITunesItemDTO (
+data class ITunesItemDTO(
     var wrapperType: String? = null,
     var kind: String? = null,
     var artistId: Int? = 0,
@@ -48,6 +48,6 @@ data class ITunesItemDTO (
     var longDescription: String? = null,
     var hasITunesExtras: Boolean? = false,
     var collectionArtistName: String? = null,
-    ) : Parcelable
+) : Parcelable
 
 fun ITunesItemDTO.mapToDomain(): ITunesItem = ITunesItem(artworkUrl100, collectionPrice, collectionName, releaseDate, artistName, shortDescription, trackName)

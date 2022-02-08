@@ -14,6 +14,6 @@ data class ITunesItem(
     var artistName: String? = null,
     var shortDescription: String? = null,
     var trackName: String? = null,
-): Parcelable {
+) : Parcelable {
     val formattedDate: String get() = releaseDate?.formatDate(DateFormat.serviceDateFormat, DateFormat.appDateFormat) ?: ""
 }

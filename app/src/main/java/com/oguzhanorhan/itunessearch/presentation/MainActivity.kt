@@ -1,7 +1,7 @@
 package com.oguzhanorhan.itunessearch.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.oguzhanorhan.itunessearch.R
 
 class MainActivity : AppCompatActivity() {

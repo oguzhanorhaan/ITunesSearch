@@ -2,7 +2,6 @@ package com.oguzhanorhan.itunessearch.presentation.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.oguzhanorhan.itunessearch.common.BaseVM
 import com.oguzhanorhan.itunessearch.data.model.ITunesApiStatus
 import com.oguzhanorhan.itunessearch.datasource.model.mapToDomain
@@ -10,14 +9,12 @@ import com.oguzhanorhan.itunessearch.domain.model.FilterItem
 import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
 import com.oguzhanorhan.itunessearch.domain.usecase.RetrieveFilterItemsUseCase
 import com.oguzhanorhan.itunessearch.domain.usecase.SearchItemsUseCase
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class SearchVM constructor(
     private val searchItemsUseCase: SearchItemsUseCase,
-    private val retrieveFilterItemsUseCase: RetrieveFilterItemsUseCase): BaseVM() {
+    private val retrieveFilterItemsUseCase: RetrieveFilterItemsUseCase
+) : BaseVM() {
     private var currentOffSet = 0
     private var paginationLimit = 20
 
@@ -25,7 +22,6 @@ class SearchVM constructor(
 
     val status: LiveData<ITunesApiStatus>
         get() = _status
-
 
     private val _items = MutableLiveData<List<ITunesItem>>()
 
@@ -58,24 +54,23 @@ class SearchVM constructor(
     fun searchItems(text: String, category: FilterItem) {
 
         if (currentOffSet < domainItems.size && currentOffSet > 0) {
-                if (currentOffSet + paginationLimit < domainItems.size) {
-                    currentOffSet+=paginationLimit
-                } else {
-                    currentOffSet = domainItems.size
-                }
+            if (currentOffSet + paginationLimit < domainItems.size) {
+                currentOffSet += paginationLimit
+            } else {
+                currentOffSet = domainItems.size
+            }
             _items.value = ArrayList(domainItems.subList(0, currentOffSet))
-        }
-        else {
+        } else {
             launch {
                 _status.value = ITunesApiStatus.LOADING
                 val listResult = searchItemsUseCase.get(text, category)
                 _status.value = listResult.status
                 domainItems.clear()
 
-                when(_status.value) {
+                when (_status.value) {
                     ITunesApiStatus.DONE -> {
 
-                        listResult.data?.forEach{
+                        listResult.data?.forEach {
                             domainItems.add(it.mapToDomain())
                         }
                         if (paginationLimit < domainItems.size) {
@@ -87,12 +82,10 @@ class SearchVM constructor(
                         }
                     }
 
-                    ITunesApiStatus.ERROR ->_items.value = ArrayList()
+                    ITunesApiStatus.ERROR -> _items.value = ArrayList()
                 }
             }
         }
-
-
     }
 
     fun displayItemDetails(item: ITunesItem) {

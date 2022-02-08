@@ -12,31 +12,34 @@ import com.oguzhanorhan.itunessearch.domain.usecase.RetrieveFilterItemsUseCase
 import com.oguzhanorhan.itunessearch.domain.usecase.SearchItemsUseCase
 import com.oguzhanorhan.itunessearch.presentation.itemdetails.ItemDetailsVM
 import com.oguzhanorhan.itunessearch.presentation.search.SearchVM
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.module.Module
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import org.koin.android.viewmodel.dsl.viewModel
 
 fun injectFeature() = loadFeature
 
 private val loadFeature by lazy {
-    loadKoinModules( listOf(
-        viewModelModule,
-        useCaseModule,
-        repositoryModule,
-        dataSourceModule,
-        networkModule
-    ))
+    loadKoinModules(
+        listOf(
+            viewModelModule,
+            useCaseModule,
+            repositoryModule,
+            dataSourceModule,
+            networkModule
+        )
+    )
 }
 
 val viewModelModule: Module = module {
     viewModel {
-        SearchVM (
+        SearchVM(
             searchItemsUseCase = get(),
-            retrieveFilterItemsUseCase = get())
+            retrieveFilterItemsUseCase = get()
+        )
     }
-    viewModel { (item : ITunesItem) -> ItemDetailsVM(item) }
+    viewModel { (item: ITunesItem) -> ItemDetailsVM(item) }
 }
 
 val useCaseModule: Module = module {
@@ -45,7 +48,7 @@ val useCaseModule: Module = module {
 }
 
 val repositoryModule: Module = module {
-    single { ItunesRepositoryImpl( remoteDataSource = get(), responseHandler = get()) as ITunesRepository }
+    single { ItunesRepositoryImpl(remoteDataSource = get(), responseHandler = get()) as ITunesRepository }
 }
 
 val dataSourceModule: Module = module {
@@ -56,7 +59,6 @@ val networkModule: Module = module {
     single { itunesApi }
     single { ResponseHandler() }
 }
-
 
 private const val BASE_URL = "https://itunes.apple.com/"
 
