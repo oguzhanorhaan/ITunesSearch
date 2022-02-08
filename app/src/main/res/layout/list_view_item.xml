@@ -12,11 +12,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="@dimen/card_view_height"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        android:layout_margin="@dimen/card_view_standard_elev"
+        app:cardCornerRadius="@dimen/card_view_standard_elev"
+        app:cardElevation="@dimen/card_view_standard_elev">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="@dimen/list_item_image_wh"
+                android:layout_height="@dimen/list_item_image_wh"
                 android:layout_gravity="center"
                 bind:imageUrl="@{item.artworkUrl100}" />
 
@@ -48,7 +48,7 @@
                 android:id="@+id/release_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{item.releaseDate}"
+                android:text="@{item.formattedDate}"
                 android:textAlignment="center" />
 
         </LinearLayout>

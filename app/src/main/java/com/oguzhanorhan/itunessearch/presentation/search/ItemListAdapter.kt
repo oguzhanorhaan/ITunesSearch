@@ -7,17 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oguzhanorhan.itunessearch.databinding.ListViewItemBinding
 import com.oguzhanorhan.itunessearch.domain.model.ITunesItem
 
-class ItemListAdapter( val onClickListener: OnClickListener ) :
+class ItemListAdapter(val onClickListener: OnClickListener) :
     ListAdapter<ITunesItem, ItemListAdapter.ListItemViewHolder>(DiffCallback) {
 
-    class ListItemViewHolder(private var binding: ListViewItemBinding):
+    class ListItemViewHolder(private var binding: ListViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ITunesItem) {
             binding.item = item
             binding.executePendingBindings()
         }
     }
-
 
     companion object DiffCallback : DiffUtil.ItemCallback<ITunesItem>() {
         override fun areItemsTheSame(oldItem: ITunesItem, newItem: ITunesItem): Boolean {
@@ -29,12 +28,12 @@ class ItemListAdapter( val onClickListener: OnClickListener ) :
         }
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): ListItemViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ListItemViewHolder {
         return ListItemViewHolder(ListViewItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
-
 
     override fun onBindViewHolder(holder: ListItemViewHolder, position: Int) {
         val item = getItem(position)

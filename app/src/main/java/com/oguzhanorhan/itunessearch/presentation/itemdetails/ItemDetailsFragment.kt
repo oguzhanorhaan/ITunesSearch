@@ -9,10 +9,13 @@ import com.oguzhanorhan.itunessearch.databinding.FragmentItemDetailsBinding
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class ItemDetailsFragment: Fragment() {
+class ItemDetailsFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = FragmentItemDetailsBinding.inflate(inflater)
         binding.lifecycleOwner = this
         val item = ItemDetailsFragmentArgs.fromBundle(requireArguments()).selectedItem

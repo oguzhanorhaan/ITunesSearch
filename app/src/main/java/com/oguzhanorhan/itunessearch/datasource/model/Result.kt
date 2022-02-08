@@ -7,4 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class SearchResponse(
     var resultCount: Int? = 0,
     var results: List<ITunesItemDTO>?
-): Parcelable
+) : Parcelable

@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.oguzhanorhan.itunessearch.databinding.ItemFilterBinding
 import com.oguzhanorhan.itunessearch.domain.model.FilterItem
 
-class FilterListAdapter ( val onClickListener: OnClickListener ) :
+class FilterListAdapter(val onClickListener: OnClickListener) :
     ListAdapter<FilterItem, FilterListAdapter.FilterItemViewHolder>(DiffCallback) {
 
-    class FilterItemViewHolder(private var binding: ItemFilterBinding):
+    class FilterItemViewHolder(private var binding: ItemFilterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: FilterItem) {
             binding.item = item
@@ -29,12 +29,12 @@ class FilterListAdapter ( val onClickListener: OnClickListener ) :
         }
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup,
-                                    viewType: Int): FilterItemViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): FilterItemViewHolder {
         return FilterItemViewHolder(ItemFilterBinding.inflate(LayoutInflater.from(parent.context)))
     }
-
 
     override fun onBindViewHolder(holder: FilterItemViewHolder, position: Int) {
         val item = getItem(position)

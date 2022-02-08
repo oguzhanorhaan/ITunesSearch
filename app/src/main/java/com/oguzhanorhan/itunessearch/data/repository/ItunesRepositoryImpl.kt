@@ -10,7 +10,7 @@ import com.oguzhanorhan.itunessearch.domain.repository.ITunesRepository
 class ItunesRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
     private val responseHandler: ResponseHandler
-): ITunesRepository {
+) : ITunesRepository {
     override suspend fun getSearchItemsList(text: String, category: FilterItem): Resource<List<ITunesItemDTO>> {
         return try {
             val response = remoteDataSource.search(text, category.type.key)
