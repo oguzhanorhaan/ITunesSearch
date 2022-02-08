@@ -32,3 +32,14 @@ Commit Message Convention
  - Update: Update a file or structure
  - Fix: Fix changes  
  - Remove: Remove a file or code  
+
+Commit messages and branches are below:
+![Screenshot](commits.png)
+
+Project divided into 5 tasks, ITS(ITunes Search):   
+ITS-001 - Add base structure for the project  
+ITS-002 - Create Search & List screen    
+ITS-003 - Create Search Item Detail Screen   
+ITS-004 - Add pagination for search screen   
+ITS-005 - Refactor code and add tests.  
+
