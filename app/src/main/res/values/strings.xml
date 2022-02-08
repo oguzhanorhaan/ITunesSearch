@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ITunesSearch</string>
+    <string name="release_date">Release date:</string>
+    <string name="price">Price:</string>
+    <string name="short_description">Short description</string>
+    <string name="artist_name">Artist name:</string>
+    <string name="collection_name">Collection name:</string>
+    <string name="enter_more_than_2_char">Please enter more than 2 character</string>
+    <string name="select_category">Please select a category</string>
 </resources>
